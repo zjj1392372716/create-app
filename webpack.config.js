@@ -9,8 +9,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const debug = require('debug')('app:webpack:config');
-const CleanPlugin = require('clean-webpack-plugin') //webpack插件，用于清除目录文件
-
+const CleanPlugin = require('clean-webpack-plugin'); // webpack插件，用于清除目录文件
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 // ------------------------------------
 // RULES INJECTION!
 
@@ -142,6 +142,10 @@ const stagePlugins = {
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[name].[hash].css'
     }),
+    new CopyWebpackPlugin([
+      { from: path.join(__dirname, '/src/assets'), to: path.join(__dirname, '/dist/assets') },
+      { from: path.join(__dirname, '/src/static'), to: path.join(__dirname, '/dist/static') }
+    ]),
     new HtmlWebpackPlugin({
       template: path.resolve('./src/index.html'),
       filename: 'index.html',

@@ -11,7 +11,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='app'>
-          app111
+        app111
+        <img src='../assets/images/1.jpg' alt='img' />
       </div>
     );
   }
