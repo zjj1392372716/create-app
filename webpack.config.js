@@ -68,6 +68,22 @@ const rules = [
     ]
   },
   {
+    test: /\.less$/,
+    use: [
+      __PROD__ ? MiniCssExtractPlugin.loader : 'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          modules: true,
+          localIdentName: '[local]___[hash:base64:5]'
+        }
+      },
+      'postcss-loader',
+      'less-loader'
+    ]
+  },
+  {
     test: /\.(png|jpg|jpeg|gif|svg)$/,
     use: [
       {
@@ -82,13 +98,13 @@ const rules = [
   {
     test: /\.(woff2|eot|ttf|otf)$/,
     use: [
-        {
-            loader: 'url-loader',
-            options: {
-                limit: 100000,
-                name: 'fonts/[name]-[hash:7].[ext]'
-            }
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          name: 'fonts/[name]-[hash:7].[ext]'
         }
+      }
     ]
   }
 ];
